@@ -206,5 +206,5 @@ jobs:
         working-directory: ${{ env.TF_WORKING_DIR }}
         run: terraform destroy \
             -var="resource_group_name=${TF_BACKEND_RG}" \
-            -var="tags=${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}" \
+            -var="tags=${GITHUB_SHA}" \
             -auto-approve
