@@ -204,7 +204,8 @@ jobs:
 
       - name: "Terraform Destroy"
         working-directory: ${{ env.TF_WORKING_DIR }}
-        run: terraform destroy \
+        run: |
+          terraform destroy \
             -var="resource_group_name=${TF_BACKEND_RG}" \
             -var="tags=${GITHUB_SHA}" \
             -auto-approve
