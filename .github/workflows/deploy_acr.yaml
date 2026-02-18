@@ -207,5 +207,5 @@ jobs:
         run: |
           terraform destroy \
             -var="resource_group_name=${TF_BACKEND_RG}" \
-            -var="tags=${GITHUB_SHA}" \
+            -var="tags=${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ github.sha }}" \
             -auto-approve
