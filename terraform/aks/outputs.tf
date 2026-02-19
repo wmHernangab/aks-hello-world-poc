@@ -15,5 +15,5 @@ output "service_name" {
 
 output "service_external_endpoint" {
   description = "The external endpoint of the service once available"
-  value       = try(kubernetes_service_v1.hello_world_service.status[0].load_balancer[0].ingress[0].ip, kubernetes_service_v1.hello_world_service.status[0].load_balancer[0].ingress[0].hostname, null))
+  value       = try(kubernetes_service_v1.hello_world_service.status[0].load_balancer[0].ingress[0].ip, kubernetes_service_v1.hello_world_service.status[0].load_balancer[0].ingress[0].hostname, null)
 }
