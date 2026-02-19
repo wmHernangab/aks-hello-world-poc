@@ -30,7 +30,7 @@ env:
   TF_IN_AUTOMATION: "true"
   TF_INPUT: "false"
   TF_WORKING_DIR: "terraform/acr"
-  TF_VERSION: "1.11.4"
+  TF_VERSION: "1.14.5"
   TF_VAR_acr_name: ${{ vars.ACR_NAME }} # Pass ACR name into Terraform via TF_VAR to avoid duplicating in tfvars - store this in GitHub variables
 
   # Azure auth via OIDC - store these in GitHub secrets
