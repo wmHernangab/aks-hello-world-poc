@@ -1,3 +1,4 @@
+
 # Look up the existing resource group
 data "azurerm_resource_group" "rg" {
   name = var.resource_group_name
@@ -16,7 +17,7 @@ locals {
 
   # The AKS workflow pushes an image tagged with the Git SHA
   # Terraform deploys that same tag by receiving image_tag at runtime
-  image            = "${local.acr_login_server}/${var.image_name}:${var.image_tag}"
+  image = "${local.acr_login_server}/${var.image_name}:${var.image_tag}"
 
   # Derive Kubernetes naming from a single app_name input
   k8s_namespace       = var.app_name
@@ -33,12 +34,12 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   # Single node pool for a minimal learning setup
   default_node_pool {
-    name            = "default"
-    node_count      = var.default_node_pool_node_count
-    vm_size         = var.default_node_pool_vm_size
+    name       = "default"
+    node_count = var.default_node_pool_node_count
+    vm_size    = var.default_node_pool_vm_size
 
     # Tags are provided as a single map variable
-    tags            = var.tags
+    tags = var.tags
   }
 
   # System assigned identity keeps auth simple for a learning repo
@@ -47,7 +48,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   # Tags are provided as a single map variable
-  tags                = var.tags
+  tags = var.tags
 }
 
 # Allow the cluster kubelet identity to pull from the ACR
@@ -60,7 +61,7 @@ resource "azurerm_role_assignment" "this" {
 }
 
 resource "kubernetes_namespace_v1" "hello_world_ns" {
-  depends_on = [azurerm_role_assignment.this]  # Ensure ACR pull permissions exist before creating Kubernetes objects
+  depends_on = [azurerm_role_assignment.this] # Ensure ACR pull permissions exist before creating Kubernetes objects
   metadata {
     name = local.k8s_namespace
   }
@@ -95,8 +96,8 @@ resource "kubernetes_deployment_v1" "hello_world_app" {
       spec {
         container {
           # Keep the container name derived from the namespace for clarity
-          name  = "${local.k8s_namespace}-container"
-          image = local.image
+          name              = "${local.k8s_namespace}-container"
+          image             = local.image
           image_pull_policy = "Always"
 
           port {

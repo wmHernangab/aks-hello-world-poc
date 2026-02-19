@@ -27,5 +27,4 @@ jobs:
           for dir in terraform/*/; do
             echo "Validating $dir"
             terraform -chdir="$dir" init -backend=false
-            terraform -chdir="$dir" validate -var-file="vars/${{ inputs.environment }}.tfvars"
-          done
+            terraform -chdir="$dir" validate
